@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OnanaVault Lite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.18.9/babel.min.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const { BrowserRouter, Routes, Route, useNavigate, Link } = ReactRouterDOM;
+
+    const fakeAuth = {
+      isAuthenticated: () => !!localStorage.getItem("user"),
+      login: (email) => localStorage.setItem("user", email),
+      logout: () => localStorage.removeItem("user"),
+      getUser: () => localStorage.getItem("user")
+    };
+
+    const Login = () => {
+      const [email, setEmail] = useState("");
+      const navigate = useNavigate();
+
+      const handleLogin = () => {
+        fakeAuth.login(email);
+        navigate("/finance");
+      };
+
+      return (
+        <div className="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow">
+          <h2 className="text-xl mb-4">Log In</h2>
+          <input className="border p-2 w-full mb-4" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <button onClick={handleLogin} className="bg-blue-600 text-white px-4 py-2 rounded">Login</button>
+        </div>
+      );
+    };
+
+    const Finance = () => {
+      const [transactions, setTransactions] = useState([]);
+      const [amount, setAmount] = useState("");
+      const [desc, setDesc] = useState("");
+
+      useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("finance") || "[]");
+        setTransactions(data);
+      }, []);
+
+      const saveTransactions = (newData) => {
+        setTransactions(newData);
+        localStorage.setItem("finance", JSON.stringify(newData));
+      };
+
+      const addTransaction = () => {
+        const newTx = { id: Date.now(), amount: parseFloat(amount), desc };
+        const updated = [...transactions, newTx];
+        saveTransactions(updated);
+        setAmount("");
+        setDesc("");
+      };
+
+      const total = transactions.reduce((acc, t) => acc + t.amount, 0);
+
+      return (
+        <div className="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow">
+          <h2 className="text-2xl font-bold mb-4">Finance</h2>
+          <p className="mb-2 font-semibold">Balance: ${total.toFixed(2)}</p>
+          <div className="flex gap-2 mb-4">
+            <input className="border p-2 flex-1" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
+            <input className="border p-2 flex-1" placeholder="Description" value={desc} onChange={(e) => setDesc(e.target.value)} />
+            <button onClick={addTransaction} className="bg-green-600 text-white px-4 py-2 rounded">Add</button>
+          </div>
+          <ul>
+            {transactions.map(t => (
+              <li key={t.id} className="flex justify-between border-b py-2">
+                <span>{t.desc}</span><span>${t.amount.toFixed(2)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    };
+
+    const Header = () => {
+      const navigate = useNavigate();
+      const logout = () => {
+        fakeAuth.logout();
+        navigate("/");
+      };
+
+      return (
+        <div className="bg-blue-800 text-white p-4 flex justify-between">
+          <span>OnanaVault Lite</span>
+          {fakeAuth.isAuthenticated() && <button onClick={logout} className="underline">Logout</button>}
+        </div>
+      );
+    };
+
+    const App = () => (
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/finance" element={<Finance />} />
+        </Routes>
+      </BrowserRouter>
+    );
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
