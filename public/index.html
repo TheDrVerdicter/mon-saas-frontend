@@ -7,146 +7,133 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2575.7">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;OnanaVault Lite&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.18.9/babel.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="bg-gray-100 font-sans"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="root"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="text/babel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const { useState, useEffect } = React;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const { BrowserRouter, Routes, Route, useNavigate, Link } = ReactRouterDOM;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const fakeAuth = {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>isAuthenticated: () =&gt; !!localStorage.getItem("user"),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>login: (email) =&gt; localStorage.setItem("user", email),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>logout: () =&gt; localStorage.removeItem("user"),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>getUser: () =&gt; localStorage.getItem("user")</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const Login = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const [email, setEmail] = useState("");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const navigate = useNavigate();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const handleLogin = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>fakeAuth.login(email);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>navigate("/finance");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 className="text-xl mb-4"&gt;Log In&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input className="border p-2 w-full mb-4" placeholder="Email" value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button onClick={handleLogin} className="bg-blue-600 text-white px-4 py-2 rounded"&gt;Login&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const Finance = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const [transactions, setTransactions] = useState([]);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const [amount, setAmount] = useState("");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const [desc, setDesc] = useState("");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>useEffect(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const data = JSON.parse(localStorage.getItem("finance") || "[]");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setTransactions(data);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}, []);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const saveTransactions = (newData) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setTransactions(newData);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>localStorage.setItem("finance", JSON.stringify(newData));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const addTransaction = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const newTx = { id: Date.now(), amount: parseFloat(amount), desc };</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const updated = [...transactions, newTx];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>saveTransactions(updated);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setAmount("");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setDesc("");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const total = transactions.reduce((acc, t) =&gt; acc + t.amount, 0);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 className="text-2xl font-bold mb-4"&gt;Finance&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="mb-2 font-semibold"&gt;Balance: ${total.toFixed(2)}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex gap-2 mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input className="border p-2 flex-1" placeholder="Amount" value={amount} onChange={(e) =&gt; setAmount(e.target.value)} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;input className="border p-2 flex-1" placeholder="Description" value={desc} onChange={(e) =&gt; setDesc(e.target.value)} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onClick={addTransaction} className="bg-green-600 text-white px-4 py-2 rounded"&gt;Add&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{transactions.map(t =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li key={t.id} className="flex justify-between border-b py-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;{t.desc}&lt;/span&gt;&lt;span&gt;${t.amount.toFixed(2)}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const Header = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const navigate = useNavigate();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const logout = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>fakeAuth.logout();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>navigate("/");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="bg-blue-800 text-white p-4 flex justify-between"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;OnanaVault Lite&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>{fakeAuth.isAuthenticated() &amp;&amp; &lt;button onClick={logout} className="underline"&gt;Logout&lt;/button&gt;}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Ancien code, qui peut poser des problèmes</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// const App = () =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">  </span>&lt;BrowserRouter&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">    </span>&lt;Header /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">    </span>&lt;Routes&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">      </span>&lt;Route path="/" element={&lt;Login /&gt;} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">      </span>&lt;Route path="/finance" element={&lt;Finance /&gt;} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">    </span>&lt;/Routes&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// <span class="Apple-converted-space">  </span>&lt;/BrowserRouter&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// );</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ReactDOM.createRoot(document.getElementById("root")).render(&lt;App /&gt;);</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Nouveau code corrigé</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const App = () =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;Header /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;Routes&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;Route path="/" element={&lt;Login /&gt;} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;Route path="/finance" element={&lt;Finance /&gt;} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/Routes&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>ReactDOM.createRoot(document.getElementById("root")).render(</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;BrowserRouter&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;App /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/BrowserRouter&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;OnanaVault Lite&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.18.9/babel.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body class="bg-gray-100 font-sans"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div id="root"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script type="text/babel"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const { useState, useEffect } = React;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const { BrowserRouter, Routes, Route, useNavigate } = ReactRouterDOM;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const fakeAuth = {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>isAuthenticated: () =&gt; !!localStorage.getItem("user"),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>login: (email) =&gt; localStorage.setItem("user", email),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>logout: () =&gt; localStorage.removeItem("user"),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>getUser: () =&gt; localStorage.getItem("user")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const Login = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const [email, setEmail] = useState("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const navigate = useNavigate();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const handleLogin = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>fakeAuth.login(email);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>navigate("/finance");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div className="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h2 className="text-xl mb-4"&gt;Log In&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;input className="border p-2 w-full mb-4" placeholder="Email" value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;button onClick={handleLogin} className="bg-blue-600 text-white px-4 py-2 rounded"&gt;Login&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const Finance = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const [transactions, setTransactions] = useState([]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const [amount, setAmount] = useState("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const [desc, setDesc] = useState("");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const data = JSON.parse(localStorage.getItem("finance") || "[]");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>setTransactions(data);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}, []);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const saveTransactions = (newData) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>setTransactions(newData);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>localStorage.setItem("finance", JSON.stringify(newData));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const addTransaction = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const newTx = { id: Date.now(), amount: parseFloat(amount), desc };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const updated = [...transactions, newTx];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>saveTransactions(updated);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>setAmount("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>setDesc("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const total = transactions.reduce((acc, t) =&gt; acc + t.amount, 0);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div className="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h2 className="text-2xl font-bold mb-4"&gt;Finance&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p className="mb-2 font-semibold"&gt;Balance: ${total.toFixed(2)}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div className="flex gap-2 mb-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input className="border p-2 flex-1" placeholder="Amount" value={amount} onChange={(e) =&gt; setAmount(e.target.value)} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input className="border p-2 flex-1" placeholder="Description" value={desc} onChange={(e) =&gt; setDesc(e.target.value)} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onClick={addTransaction} className="bg-green-600 text-white px-4 py-2 rounded"&gt;Add&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{transactions.map(t =&gt; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>&lt;li key={t.id} className="flex justify-between border-b py-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span&gt;{t.desc}&lt;/span&gt;&lt;span&gt;${t.amount.toFixed(2)}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>))}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const Header = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const navigate = useNavigate();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const logout = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>fakeAuth.logout();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>navigate("/");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div className="bg-blue-800 text-white p-4 flex justify-between"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span&gt;OnanaVault Lite&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>{fakeAuth.isAuthenticated() &amp;&amp; &lt;button onClick={logout} className="underline"&gt;Logout&lt;/button&gt;}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const App = () =&gt; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;Header /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;Routes&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;Route path="/" element={&lt;Login /&gt;} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;Route path="/finance" element={&lt;Finance /&gt;} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/Routes&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>ReactDOM.createRoot(document.getElementById("root")).render(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;BrowserRouter&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;App /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/BrowserRouter&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
